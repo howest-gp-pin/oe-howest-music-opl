@@ -1,0 +1,42 @@
+﻿@page "/"
+@inject ICrudService<Track> trackService;
+
+
+
+<PageTitle>Index</PageTitle>
+
+<h1>Howest favorite songs</h1>
+
+@if(currentTrack == null)
+{
+    <TrackList Tracks="allTracks" OnAdd="AddTrack"></TrackList>
+}
+else
+{
+    <TrackForm Track="currentTrack" OnSave="SaveTrack"></TrackForm>
+}
+
+@code {
+    private Track[] allTracks;
+    private Track[] favouriteTrackList;
+
+    private Track currentTrack = null;
+
+    protected async override Task OnInitializedAsync()
+    {
+        allTracks = (await trackService.GetAllAsync()).ToArray();
+    }
+
+    private void AddTrack()
+    {
+        currentTrack = new Track();
+    }
+
+    private async void SaveTrack(Track trackToSave)
+    {
+        await trackService.CreateAsync(trackToSave);
+        allTracks = (await trackService.GetAllAsync()).ToArray();
+        currentTrack = null;
+    }
+}
+

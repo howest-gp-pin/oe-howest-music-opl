@@ -1,0 +1,34 @@
+﻿<EditForm Model="@Track" OnValidSubmit="e => OnSave.InvokeAsync(Track)">
+    <DataAnnotationsValidator></DataAnnotationsValidator>
+    <ValidationSummary></ValidationSummary>
+
+    <div class="form-group">
+        <label for="name">Name: </label>
+        <InputText id="name" class="form-control"@bind-Value="Track.Name" />
+        <ValidationMessage For="@(() => Track.Name)" />
+    </div>
+
+    <div class="form-group">
+        <label for="name">Artist: </label>
+        <InputText id="artist" class="form-control" @bind-Value="Track.Artist" />
+        <ValidationMessage For="@(() => Track.Artist)" />
+    </div>
+
+    <div class="form-group">
+        <label for="name">Rating: </label>
+        <InputNumber id="rating" class="form-control" @bind-Value="Track.Rating" />
+        <ValidationMessage For="@(() => Track.Rating)" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+    <button type="button" class="btn btn-warning">Cancel</button>
+
+</EditForm>
+
+@code {
+    [Parameter]
+    public Track Track { get; set; }
+
+    [Parameter]
+    public EventCallback<Track> OnSave { get; set; }
+}

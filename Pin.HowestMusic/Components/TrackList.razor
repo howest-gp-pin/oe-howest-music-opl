@@ -1,0 +1,37 @@
+﻿<button class="btn btn-primary" @onclick="e => OnAdd.InvokeAsync()">Add track</button>
+<table class="table mt-3">
+    <thead>
+        <tr>
+            <th></th>
+            <th>Track</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var track in Tracks)
+        {
+            <tr>
+                <td>
+                    <button class="btn btn-warning">
+                        Edit
+                    </button>
+                </td>
+                <td>@track.Name - @track.Artist (@track.Duration.ToString())</td>
+                <td>
+                    <button class="btn btn-danger">
+                        Delete
+                    </button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@code {
+    [Parameter]
+    public Track[] Tracks { get; set; }
+
+    [Parameter]
+    public EventCallback OnAdd { get; set; }
+
+}
