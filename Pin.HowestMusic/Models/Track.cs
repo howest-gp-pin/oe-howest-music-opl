@@ -9,7 +9,6 @@ namespace Pin.HowestMusic.Models
         public string Name { get; set; }
         [Required]
         public string Artist { get; set; }
-        public TimeSpan Duration { get; set; }
         //public List<Genre> Genre { get; set; }
         public DateTime ReleaseDate { get; set; }
         [Range(0, 5)]

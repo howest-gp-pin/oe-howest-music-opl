@@ -9,7 +9,7 @@
 
 @if(currentTrack == null)
 {
-    <TrackList Tracks="allTracks" OnAdd="AddTrack"></TrackList>
+    <TrackList Tracks="allTracks" OnAdd="AddTrack" OnEdit="EditTrack" OnDelete="RemoveTrack"></TrackList>
 }
 else
 {
@@ -32,11 +32,31 @@ else
         currentTrack = new Track();
     }
 
-    private async void SaveTrack(Track trackToSave)
+    private async void SaveTrack(Track track)
     {
-        await trackService.CreateAsync(trackToSave);
+        if (track.Id == Guid.Empty)
+        {
+            await trackService.CreateAsync(track);
+            allTracks = (await trackService.GetAllAsync()).ToArray();            
+            currentTrack = null;
+        }
+        else
+        {
+            await trackService.UpdateAsync(track);
+            allTracks = (await trackService.GetAllAsync()).ToArray();
+            currentTrack = null;
+        }
+    }
+
+    private async void EditTrack(Track trackToEdit)
+    {
+        currentTrack = trackToEdit;
+    }
+
+    private async void RemoveTrack(Track trackToDelete)
+    {
+        await trackService.DeleteAsync(trackToDelete.Id);
         allTracks = (await trackService.GetAllAsync()).ToArray();
-        currentTrack = null;
     }
 }
 

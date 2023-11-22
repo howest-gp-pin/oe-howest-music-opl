@@ -12,13 +12,13 @@
         {
             <tr>
                 <td>
-                    <button class="btn btn-warning">
+                    <button class="btn btn-warning" @onclick="e => OnEdit.InvokeAsync(track)">
                         Edit
                     </button>
                 </td>
-                <td>@track.Name - @track.Artist (@track.Duration.ToString())</td>
+                <td>@track.Name - @track.Artist (@track.ReleaseDate.Year)</td>
                 <td>
-                    <button class="btn btn-danger">
+                    <button class="btn btn-danger" @onclick="e => OnDelete.InvokeAsync(track)">
                         Delete
                     </button>
                 </td>
@@ -33,5 +33,16 @@
 
     [Parameter]
     public EventCallback OnAdd { get; set; }
+
+    [Parameter]
+    public EventCallback<Track> OnEdit { get; set; }
+
+    [Parameter]
+    public EventCallback<Track> OnDelete { get; set; }
+
+    protected override Task OnInitializedAsync()
+    {
+        return base.OnInitializedAsync();
+    }
 
 }
