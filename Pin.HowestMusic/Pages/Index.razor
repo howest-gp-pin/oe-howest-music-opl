@@ -26,7 +26,7 @@ else
 
     protected async override Task OnInitializedAsync()
     {
-        allTracks = (await trackService.GetAllAsync()).ToArray();
+        await RefreshTracks();
         allGenres = (await genreService.GetAllAsync()).ToArray();
     }
 
@@ -40,15 +40,13 @@ else
         if (track.Id == Guid.Empty)
         {
             await trackService.CreateAsync(track);
-            allTracks = (await trackService.GetAllAsync()).ToArray();            
-            currentTrack = null;
         }
         else
         {
             await trackService.UpdateAsync(track);
-            allTracks = (await trackService.GetAllAsync()).ToArray();
-            currentTrack = null;
         }
+        await RefreshTracks();
+        currentTrack = null;
     }
 
     private async void EditTrack(Track trackToEdit)
@@ -59,6 +57,11 @@ else
     private async void RemoveTrack(Track trackToDelete)
     {
         await trackService.DeleteAsync(trackToDelete.Id);
+
+    }
+
+    private async Task RefreshTracks()
+    {
         allTracks = (await trackService.GetAllAsync()).ToArray();
     }
 
