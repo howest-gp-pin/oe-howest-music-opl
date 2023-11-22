@@ -1,0 +1,13 @@
+﻿<div class="medal m-5">
+    <div class="position">@Ranking</div>
+    <div>@TrackName</div>
+</div>
+
+@code {
+    [Parameter]
+    public string TrackName { get; set; }
+
+    [Parameter]
+    public int Ranking { get; set; }
+
+}

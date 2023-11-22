@@ -1,0 +1,13 @@
+﻿.medal {
+    width: 100px;
+    height: 100px;
+
+    text-align: center;
+
+    background-color: lightgrey;
+    border-radius: 50%;
+}
+
+.position {
+    font-size: 2rem;
+}

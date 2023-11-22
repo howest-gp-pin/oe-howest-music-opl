@@ -1,0 +1,18 @@
+﻿@page "/nestedcomponents"
+@inject ICrudService<Track> trackService;
+<h1>Nested components</h1>
+
+<TrackRanking Title="Favourite songs" Tracks="favouriteTracks"></TrackRanking>
+<TrackRanking Title="Songs longer than 4 minutes" Tracks="longTracks"></TrackRanking>
+
+@code {
+    private Track[] favouriteTracks;
+    private Track[] longTracks;
+
+    protected async override Task OnInitializedAsync()
+    {
+        TimeOnly maxTime = new TimeOnly(0, 3);
+        favouriteTracks = (await trackService.GetAllAsync()).Where(track => track.IsFavorite).ToArray();
+        longTracks = (await trackService.GetAllAsync()).Where(track => track.Duration > maxTime).ToArray();
+    }
+}

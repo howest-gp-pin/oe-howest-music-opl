@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34302.85
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pin.HowestMusic", "Pin.HowestMusic\Pin.HowestMusic.csproj", "{CDA695DB-CE47-49E4-A3AB-3D104CC61675}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pin.HowestMusic", "Pin.HowestMusic\Pin.HowestMusic.csproj", "{CDA695DB-CE47-49E4-A3AB-3D104CC61675}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

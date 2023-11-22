@@ -1,0 +1,16 @@
+﻿<h2>@Title</h2>
+<div class="d-flex">
+    @for(int i = 0; i < Tracks.Length; i++)
+    {
+        <TrackRankingItem Ranking="@(i + 1)" TrackName="@Tracks[i].Name"></TrackRankingItem>
+    }
+</div>
+
+@code {
+    [Parameter]
+    public string Title { get; set; }
+
+    [Parameter]
+    public Track[] Tracks { get; set; }
+
+}
