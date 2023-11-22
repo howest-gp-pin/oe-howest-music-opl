@@ -13,6 +13,7 @@ builder.Services.AddServerSideBlazor();
 builder.Services.AddSingleton<WeatherForecastService>();
 
 builder.Services.AddTransient<ICrudService<Track>, InMemoryTrackService>();
+builder.Services.AddTransient<ICrudService<Genre>, InMemoryGenreService>();
 
 var app = builder.Build();
 

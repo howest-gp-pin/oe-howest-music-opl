@@ -15,6 +15,18 @@
     </div>
 
     <div class="form-group">
+        <label for="genre">Genre: </label>
+
+        <InputSelect TValue="Guid" @bind-Value="Track.GenreId">
+            @foreach(var genre in AvailableGenres)
+            {
+                <option value="@genre.Id">@genre.Name</option>
+            }
+        </InputSelect>
+        <ValidationMessage For="@(() => Track.GenreId)" />
+    </div>
+
+    <div class="form-group">
         <label for="rating">Rating: </label>
         <InputNumber id="rating" class="form-control" @bind-Value="Track.Rating" />
         <ValidationMessage For="@(() => Track.Rating)" />
@@ -45,7 +57,7 @@
     </div>
 
     <button type="submit" class="btn btn-primary">Save</button>
-    <button type="button" class="btn btn-warning">Cancel</button>
+    <button type="button" class="btn btn-warning" @onclick="e => OnCancel.InvokeAsync()">Cancel</button>
 
 </EditForm>
 
@@ -54,5 +66,11 @@
     public Track Track { get; set; }
 
     [Parameter]
+    public Genre[] AvailableGenres { get; set; }
+
+    [Parameter]
     public EventCallback<Track> OnSave { get; set; }
+
+    [Parameter]
+    public EventCallback OnCancel { get; set; }
 }

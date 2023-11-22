@@ -13,6 +13,7 @@ namespace Pin.HowestMusic.Models
         [Range(0, 5)] public int Rating { get; set; }
         public int PlayCount { get; set; }
         public bool IsFavorite { get; set; }
-        //public List<Genre> Genre { get; set; }
+        public Guid GenreId { get; set; }
+        public Genre Genre { get; set; }
     }
     }
