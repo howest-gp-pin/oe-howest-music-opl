@@ -45,10 +45,7 @@ namespace Pin.HowestMusic.Services
             if (item == null) throw new ArgumentNullException();
 
             var existing = tracks.Find(track => track.Id == item.Id);
-            //existing = item;
-
-            tracks.Remove(existing);
-            tracks.Add(item);
+            existing = item;
 
             return Task.CompletedTask;
 

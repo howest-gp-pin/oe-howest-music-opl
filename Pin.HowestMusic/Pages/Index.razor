@@ -4,12 +4,10 @@
 
 
 
-<PageTitle>Index</PageTitle>
+<PageTitle>Howest music</PageTitle>
+<h1>Howest Music</h1>
 
-<TrackRankingItem Ranking="1" TrackName="Selecta"></TrackRankingItem>
-
-<h1>Howest favorite songs</h1>
-
+<h2>All songs</h2>
 @if(currentTrack == null)
 {
     <TrackList Tracks="allTracks" OnAdd="AddTrack" OnEdit="EditTrack" OnDelete="RemoveTrack"></TrackList>
@@ -59,7 +57,7 @@ else
     private async void RemoveTrack(Track trackToDelete)
     {
         await trackService.DeleteAsync(trackToDelete.Id);
-
+        await RefreshTracks();
     }
 
     private async Task RefreshTracks()

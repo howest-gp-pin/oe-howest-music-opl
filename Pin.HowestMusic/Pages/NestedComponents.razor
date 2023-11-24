@@ -2,6 +2,10 @@
 @inject ICrudService<Track> trackService;
 <h1>Nested components</h1>
 
+<h2>All time favourite</h2>
+<TrackRankingItem Ranking="1" TrackName="The Verve - Bitter sweet symphony"></TrackRankingItem>
+
+<h2>The component above, but nested</h2>
 <TrackRanking Title="Favourite songs" Tracks="favouriteTracks"></TrackRanking>
 <TrackRanking Title="Favourite songs longer than 4 minutes" Tracks="longTracks"></TrackRanking>
 
