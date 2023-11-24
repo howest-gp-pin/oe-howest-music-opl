@@ -1,6 +1,6 @@
-﻿<div class="medal m-5">
+﻿<div class="medal m-5 @GetColor()">
     <div class="position">@Ranking</div>
-    <div>@TrackName</div>
+    <div class="GetRanking">@TrackName</div>
 </div>
 
 @code {
@@ -9,5 +9,26 @@
 
     [Parameter]
     public int Ranking { get; set; }
+
+    [Parameter]
+    public bool MedalMode { get; set; }
+
+    private string GetColor()
+    {
+        string color = "grey";
+
+        if(MedalMode)
+        {
+            color = Ranking switch {
+                1 => "gold",
+                2 => "silver",
+                3 => "bronze",
+                _ => "grey"
+            };            
+        }
+
+        return color;
+
+    }
 
 }

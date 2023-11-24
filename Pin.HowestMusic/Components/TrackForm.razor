@@ -2,22 +2,21 @@
     <DataAnnotationsValidator></DataAnnotationsValidator>
     <ValidationSummary></ValidationSummary>
 
-    <div class="form-group">
+    <div class="form-group m-3">
         <label for="name">Name: </label>
         <InputText id="name" class="form-control"@bind-Value="Track.Name" />
         <ValidationMessage For="@(() => Track.Name)" />
     </div>
 
-    <div class="form-group">
+    <div class="form-group m-3">
         <label for="artist">Artist: </label>
         <InputText id="artist" class="form-control" @bind-Value="Track.Artist" />
         <ValidationMessage For="@(() => Track.Artist)" />
     </div>
 
-    <div class="form-group">
+    <div class="form-group m-3">
         <label for="genre">Genre: </label>
-
-        <InputSelect TValue="Guid" @bind-Value="Track.GenreId">
+        <InputSelect id="genre" TValue="Guid" @bind-Value="Track.GenreId">
             @foreach(var genre in AvailableGenres)
             {
                 <option value="@genre.Id">@genre.Name</option>
@@ -26,31 +25,31 @@
         <ValidationMessage For="@(() => Track.GenreId)" />
     </div>
 
-    <div class="form-group">
+    <div class="form-group m-3">
         <label for="rating">Rating: </label>
         <InputNumber id="rating" class="form-control" @bind-Value="Track.Rating" />
         <ValidationMessage For="@(() => Track.Rating)" />
     </div>
 
-    <div class="form-group">
+    <div class="form-group m-3">
         <label for="releasedate">Release date: </label>
-        <InputDate @bind-Value="Track.ReleaseDate"></InputDate>
+        <InputDate id="releasedate" @bind-Value="Track.ReleaseDate"></InputDate>
         <ValidationMessage For="@(() => Track.ReleaseDate)" />
     </div>
 
-    <div class="form-group">
+    <div class="form-group m-3">
         <label for="playcount">Play count: </label>
         <InputNumber @bind-Value="Track.PlayCount"></InputNumber>
         <ValidationMessage For="@(() => Track.PlayCount)" />
     </div>
 
-    <div class="form-group">
+    <div class="form-group m-3">
         <label for="playcount">Favourite: </label>
         <InputCheckbox @bind-Value="Track.IsFavorite"></InputCheckbox>
         <ValidationMessage For="@(() => Track.IsFavorite)" />
     </div>
 
-    <div class="form-group">
+    <div class="form-group m-3">
         <label for="duration">duration: </label>
         <InputDate Type="InputDateType.Time" @bind-Value="Track.Duration" />
         <ValidationMessage For="@(() => Track.Duration)" />
