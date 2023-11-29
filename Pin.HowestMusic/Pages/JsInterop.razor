@@ -16,11 +16,15 @@
             var tracks = (await trackService.GetAllAsync()).ToArray();
             var genres = (await genreService.GetAllAsync()).ToArray();
 
-            var rap = genres.SingleOrDefault(genre => genre.Name.Equals("Rap"));
-            var genresNames = new string[] { rap.Name };
-            var count = new int[] { tracks.Where(track => track.GenreId == rap.Id).Count() };
+            var genreLabels = genres.Select(genre => genre.Name).ToArray();
+            var genreCounts = new int[genreLabels.Length];
 
-            await jsRuntime.InvokeVoidAsync("displayChart", (object)genresNames, (object)count);
+            for(int i = 0; i < genres.Length; i++)
+            {
+                genreCounts[i] = tracks.Count(track => track.GenreId == genres[i].Id);
+            }
+
+            await jsRuntime.InvokeVoidAsync("displayChart", (object)genreLabels, (object)genreCounts);
         }
     }
 
