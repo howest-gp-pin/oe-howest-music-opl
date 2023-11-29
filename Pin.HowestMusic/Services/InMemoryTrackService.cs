@@ -24,15 +24,15 @@ namespace Pin.HowestMusic.Services
 
         public Task DeleteAsync(Guid id)
         {
-            var trackToDelete = tracks.FirstOrDefault(track => track.Id.Equals(id));
+            var trackToDelete = tracks.SingleOrDefault(track => track.Id.Equals(id));
             tracks.Remove(trackToDelete);
 
             return Task.CompletedTask;
         }
 
-        public Task<Track> GetAsync(int id)
+        public Task<Track> GetAsync(Guid id)
         {
-            throw new NotImplementedException();
+            return Task.FromResult(tracks.SingleOrDefault(track => track.Id == id));
         }
 
         public Task<IQueryable<Track>> GetAllAsync()
@@ -40,14 +40,19 @@ namespace Pin.HowestMusic.Services
             return Task.FromResult(tracks.AsQueryable());
         }
 
-        public Task UpdateAsync(Track item)
+        public async Task UpdateAsync(Track item)
         {
-            if (item == null) throw new ArgumentNullException();
+            var existing = await GetAsync(item.Id);
+            if (existing == null) throw new ArgumentException("Track not found");
 
-            var existing = tracks.Find(track => track.Id == item.Id);
-            existing = item;
-
-            return Task.CompletedTask;
+            existing.Name = item.Name;
+            existing.Artist = item.Artist;
+            existing.IsFavorite = item.IsFavorite;
+            existing.Duration = item.Duration;
+            existing.Rating = item.Rating;
+            existing.ReleaseDate = item.ReleaseDate;
+            existing.GenreId = item.GenreId;
+            existing.PlayCount = item.PlayCount;
 
         }
     }

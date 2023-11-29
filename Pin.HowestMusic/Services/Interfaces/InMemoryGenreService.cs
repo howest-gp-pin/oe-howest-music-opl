@@ -35,7 +35,7 @@ namespace Pin.HowestMusic.Services.Interfaces
             return Task.FromResult(genres.AsQueryable());
         }
 
-        public Task<Genre> GetAsync(int id)
+        public Task<Genre> GetAsync(Guid id)
         {
             throw new NotImplementedException();
         }

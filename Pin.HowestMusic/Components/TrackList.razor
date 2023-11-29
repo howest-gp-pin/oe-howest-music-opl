@@ -5,7 +5,7 @@
             <div class="card-body">
                 <h5 class="card-title">@(track.IsFavorite ? "⭐" : "")@track.Name</h5>
                 <p class="card-text">By @track.Artist</p>
-                <p class="card-text">Duration: @track.Duration</p>
+                <p class="card-text">Duration: @track.Duration.Minute:@track.Duration.Second</p>
                 <button class="btn btn-danger" @onclick="e => OnDelete.InvokeAsync(track)">
                     Delete
                 </button>
