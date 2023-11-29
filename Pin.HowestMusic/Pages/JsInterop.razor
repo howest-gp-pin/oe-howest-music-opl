@@ -1,0 +1,28 @@
+﻿@page "/jsinterop"
+@inject ICrudService<Genre> genreService;
+@inject ICrudService<Track> trackService;
+@inject IJSRuntime jsRuntime;
+
+<h3>JsInterop</h3>
+
+<canvas id="musicchart"></canvas>
+
+
+@code {
+    protected async override Task OnAfterRenderAsync(bool firstRender)
+    {
+        if(firstRender)
+        {
+            var tracks = (await trackService.GetAllAsync()).ToArray();
+            var genres = (await genreService.GetAllAsync()).ToArray();
+
+            var rap = genres.SingleOrDefault(genre => genre.Name.Equals("Rap"));
+            var genresNames = new string[] { rap.Name };
+            var count = new int[] { tracks.Where(track => track.GenreId == rap.Id).Count() };
+
+            await jsRuntime.InvokeVoidAsync("displayChart", (object)genresNames, (object)count);
+        }
+    }
+
+    private bool displayButton = true;
+}

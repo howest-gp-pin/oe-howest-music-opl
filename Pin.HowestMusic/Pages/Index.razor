@@ -1,6 +1,5 @@
 ﻿@page "/"
-@inject ICrudService<Track> trackService;
-@inject ICrudService<Genre> genreService;
+
 
 
 
@@ -18,56 +17,6 @@ else
 }
 
 @code {
-    private Genre[] allGenres;
-    private Track[] allTracks;
-    private Track[] favouriteTrackList;
-
-    private Track currentTrack = null;
-
-    protected async override Task OnInitializedAsync()
-    {
-        await RefreshTracks();
-        allGenres = (await genreService.GetAllAsync()).ToArray();
-    }
-
-    private void AddTrack()
-    {
-        currentTrack = new Track();
-    }
-
-    private async void SaveTrack(Track track)
-    {
-        if (track.Id == Guid.Empty)
-        {
-            await trackService.CreateAsync(track);
-        }
-        else
-        {
-            await trackService.UpdateAsync(track);
-        }
-        await RefreshTracks();
-        currentTrack = null;
-    }
-
-    private async void EditTrack(Track trackToEdit)
-    {
-        currentTrack = trackToEdit;
-    }
-
-    private async void RemoveTrack(Track trackToDelete)
-    {
-        await trackService.DeleteAsync(trackToDelete.Id);
-        await RefreshTracks();
-    }
-
-    private async Task RefreshTracks()
-    {
-        allTracks = (await trackService.GetAllAsync()).ToArray();
-    }
-
-    private void Cancel()
-    {
-        currentTrack = null;
-    }
+   
 }
 
