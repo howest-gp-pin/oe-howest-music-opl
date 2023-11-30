@@ -1,7 +1,5 @@
 ﻿@page "/"
-
-
-
+@using Pin.HowestMusic.Library
 
 <PageTitle>Howest music</PageTitle>
 <h1>Howest Music</h1>
@@ -15,6 +13,8 @@ else
 {
     <TrackForm Track="currentTrack" AvailableGenres="allGenres" OnSave="SaveTrack" OnCancel="Cancel"></TrackForm>
 }
+
+<Ad></Ad>
 
 @code {
    

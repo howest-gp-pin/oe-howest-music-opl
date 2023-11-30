@@ -29,7 +29,7 @@ namespace Pin.HowestMusic.Pages
             currentTrack = new Track();
         }
 
-        private async void SaveTrack(Track track)
+        private async Task SaveTrack(Track track)
         {
             if (track.Id == Guid.Empty)
             {
@@ -43,12 +43,12 @@ namespace Pin.HowestMusic.Pages
             currentTrack = null;
         }
 
-        private async void EditTrack(Track trackToEdit)
+        private async Task EditTrack(Track trackToEdit)
         {
             currentTrack = trackToEdit;
         }
 
-        private async void RemoveTrack(Track trackToDelete)
+        private async Task RemoveTrack(Track trackToDelete)
         {
             await TrackService.DeleteAsync(trackToDelete.Id);
             await RefreshTracks();

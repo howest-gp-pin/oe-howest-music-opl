@@ -1,0 +1,21 @@
+﻿@typeparam TModel where TModel : Track
+
+<div>
+    @PlaylistInfo
+</div>
+
+<ul>
+    @foreach(var track in Tracks)
+    {
+        <li>@track.Name (@track.Duration.ToShortTimeString())</li>
+    }
+</ul>
+
+@code {
+
+    [Parameter]
+    public TModel[] Tracks { get; set; }
+
+    [Parameter]
+    public RenderFragment PlaylistInfo { get; set; }
+}

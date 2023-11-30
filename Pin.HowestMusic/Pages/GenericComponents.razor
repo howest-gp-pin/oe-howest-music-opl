@@ -1,0 +1,38 @@
+﻿@page "/genericcomponents"
+
+<h3>Generic Components and RenderFragments</h3>
+
+<h4>Video tracks:</h4>
+<Playlist TModel="VideoTrack" Tracks="videoTracks">
+    <PlaylistInfo>
+        <p>This is the playlist for all the music videos in the app.</p>
+    </PlaylistInfo>
+</Playlist>
+
+<h4>Lyrics tracks:</h4>
+<Playlist TModel="LyricsTrack" Tracks="lyricsTracks">
+    <PlaylistInfo>
+        <img style="width: 15px;" src="https://th.bing.com/th/id/OIP.b9xUQpRmDrhF7hOTXhb9MAHaHa?rs=1&pid=ImgDetMain" alt="microphone" />
+        <p>Sing along with allt these awesome long songs!</p>
+    </PlaylistInfo>
+</Playlist>
+
+@code {
+    private VideoTrack[] videoTracks;
+    private LyricsTrack[] lyricsTracks;
+
+    protected override void OnInitialized()
+    {
+        videoTracks = new VideoTrack[]
+        {
+            new() { Name = "Milk chocolate girl", Duration = new TimeOnly(0, 3, 0) },
+            new() { Name = "Milkshake", Duration = new TimeOnly(0, 3, 0) },
+        };
+
+        lyricsTracks = new LyricsTrack[]
+        {
+            new() { Name = "Bohemian Rhapsody", Duration = new TimeOnly(0, 12, 0) },
+            new() { Name = "Jesus of Suburbia", Duration = new TimeOnly(0, 10, 0) },
+        };
+    }
+}
