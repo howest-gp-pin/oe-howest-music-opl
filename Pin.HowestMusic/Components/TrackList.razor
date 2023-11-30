@@ -8,7 +8,7 @@
                 <h5 class="card-title">@(track.IsFavorite ? "⭐" : "")@track.Name</h5>
                 <p class="card-text">By @track.Artist</p>
                 <p class="card-text">Duration: @track.Duration.Minute:@track.Duration.Second</p>
-                <button class="btn btn-danger" @onclick="e => DisplayConfirmDelete(track)">
+                <button class="btn btn-danger" @onclick="e => OnDelete.InvokeAsync(track)">
                     Delete
                 </button>
                 <button class="btn btn-warning" @onclick="e => OnEdit.InvokeAsync(track)">
@@ -21,16 +21,6 @@
 </div>
 
 <p>You displayed this component @TimesDisplayed time(s).</p>
-
-@if (displayConfirmDelete)
-{
-    <dialog open>
-        <p>Greetings, one and all!</p>
-        <form method="dialog">
-            <button @onclick="e => OnDelete.InvokeAsync(selectedTrack)">OK</button>
-        </form>
-    </dialog>
-}
 
 @code {
     [Parameter]
@@ -45,7 +35,6 @@
     [Parameter]
     public EventCallback<Track> OnDelete { get; set; }
 
-    private bool displayConfirmDelete;
     private Track selectedTrack;
 
     protected override Task OnInitializedAsync()
@@ -53,11 +42,4 @@
         TimesDisplayed++;
         return base.OnInitializedAsync();
     }
-
-    private void DisplayConfirmDelete(Track deleteTrack)
-    {
-        selectedTrack = deleteTrack;
-        displayConfirmDelete = true;
-    }
-
 }

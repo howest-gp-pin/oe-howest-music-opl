@@ -8,25 +8,17 @@
     public string TrackName { get; set; }
 
     [Parameter]
-    public int Ranking { get; set; }
-
-    [Parameter]
-    public bool MedalMode { get; set; }
+    public int Ranking { get; set; } = 0;
 
     private string GetColor()
     {
-        string color = "grey";
-
-        if(MedalMode)
-        {
             //switch expression, possible since C# 8
-            color = Ranking switch {
+            string color = Ranking switch {
                 1 => "gold",
                 2 => "silver",
                 3 => "bronze",
-                _ => "grey"
-            };            
-        }
+                _ => "none"
+            };
 
         return color;
 

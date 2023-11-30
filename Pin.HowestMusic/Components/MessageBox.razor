@@ -1,0 +1,18 @@
+﻿<dialog open style="z-index: 10;">
+    <p>@Message</p>
+    <form method="dialog">
+        <button @onclick="e => OnConfirm.InvokeAsync()">OK</button>
+        <button @onclick="e => OnCancel.InvokeAsync()">Cancel</button>
+    </form>
+</dialog>
+
+@code {
+    [Parameter]
+    public string Message { get; set; }
+
+    [Parameter]
+    public EventCallback OnConfirm { get; set; }    
+    
+    [Parameter]
+    public EventCallback OnCancel { get; set; }
+}

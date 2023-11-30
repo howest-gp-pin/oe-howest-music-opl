@@ -7,7 +7,13 @@
 <h2>All songs</h2>
 @if(currentTrack == null)
 {
-    <TrackList Tracks="allTracks" OnAdd="AddTrack" OnEdit="EditTrack" OnDelete="RemoveTrack"></TrackList>
+    if (displayConfirmDelete)
+    {
+        <MessageBox Message="Sure you want to delete?" OnConfirm="RemoveTrack"  OnCancel="Cancel"/>
+    }
+
+    <TrackList Tracks="allTracks" OnAdd="AddTrack" OnEdit="EditTrack" OnDelete="RemoveTrackRequested"></TrackList>
+
 }
 else
 {

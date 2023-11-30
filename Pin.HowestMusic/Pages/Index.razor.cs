@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Pin.HowestMusic.Models;
+using Pin.HowestMusic.Services;
 using Pin.HowestMusic.Services.Interfaces;
 namespace Pin.HowestMusic.Pages
 {
@@ -10,6 +11,9 @@ namespace Pin.HowestMusic.Pages
         private Track[] favouriteTrackList;
 
         private Track currentTrack = null;
+        private Track trackToDelete = null;
+
+        private bool displayConfirmDelete;
 
         //using init keyword, introduced in C# 9
         [Inject]
@@ -48,10 +52,18 @@ namespace Pin.HowestMusic.Pages
             currentTrack = trackToEdit;
         }
 
-        private async Task RemoveTrack(Track trackToDelete)
+        private async Task RemoveTrackRequested(Track request)
+        {
+            trackToDelete = request;
+            displayConfirmDelete = true;
+        }
+
+        private async Task RemoveTrack()
         {
             await TrackService.DeleteAsync(trackToDelete.Id);
             await RefreshTracks();
+            displayConfirmDelete = false;
+
         }
 
         private async Task RefreshTracks()
@@ -62,6 +74,8 @@ namespace Pin.HowestMusic.Pages
         private void Cancel()
         {
             currentTrack = null;
+            trackToDelete = null;
+            displayConfirmDelete = false;
         }
     }
 }
